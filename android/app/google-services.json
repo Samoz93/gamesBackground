@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "171837397899",
+    "firebase_url": "https://backgrounds-da730.firebaseio.com",
+    "project_id": "backgrounds-da730",
+    "storage_bucket": "backgrounds-da730.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171837397899:android:bbc544e3a7714548596d8e",
+        "android_client_info": {
+          "package_name": "com.samozstudio.backgrounds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171837397899-8do43kpm4aer29gqbao86usj35tcegml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samozstudio.backgrounds",
+            "certificate_hash": "33d4b568c9b8692002deb490f7e66b8c70c8260c"
+          }
+        },
+        {
+          "client_id": "171837397899-kr0ompperpk7uvm18dnjuksrfr4t2ptn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMu1wSdZwd3X_y3MIWB9wCRAczQIGtGEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171837397899-kr0ompperpk7uvm18dnjuksrfr4t2ptn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

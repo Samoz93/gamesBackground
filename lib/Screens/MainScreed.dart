@@ -19,6 +19,8 @@ class _MainScreenState extends State<MainScreen> {
   final ket = PageController(viewportFraction: 0.8);
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context).size;
+
     Provider.of<AuthService>(context);
     final pr = Provider.of<ImageService>(context, listen: false);
     return MyScaffold(
@@ -29,19 +31,22 @@ class _MainScreenState extends State<MainScreen> {
             return LoadingWidget();
           if (snapshot.hasError) return MyErrorPage(err: snapshot.error);
           final data = snapshot.data;
-          return CarouselSlider.builder(
-            options: CarouselOptions(
-              aspectRatio: 0.6,
-              enlargeCenterPage: true,
-              scrollDirection: Axis.vertical,
+          return Container(
+            height: media.height,
+            child: CarouselSlider.builder(
+              options: CarouselOptions(
+                aspectRatio: 0.6,
+                enlargeCenterPage: true,
+                scrollDirection: Axis.vertical,
+              ),
+              itemCount: data.length,
+              key: PageStorageKey("main"),
+              itemBuilder: (BuildContext context, int index) {
+                return TypeCarousel(
+                  type: data[index],
+                );
+              },
             ),
-            itemCount: data.length,
-            key: PageStorageKey("main"),
-            itemBuilder: (BuildContext context, int index) {
-              return TypeCarousel(
-                type: data[index],
-              );
-            },
           );
         },
       ),

@@ -3,6 +3,7 @@ import 'package:backgrounds/Widgets/CustomNetImage.dart';
 import 'package:backgrounds/Widgets/MyScaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
 
 class ImageScreen extends StatelessWidget {
@@ -14,7 +15,6 @@ class ImageScreen extends StatelessWidget {
     return MyScaffold(
       child: Stack(
         children: <Widget>[
-          Text("url"),
           Hero(
             tag: url,
             child: CustomNetImage(
@@ -53,7 +53,7 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
         width: media.width * 0.7,
         height: media.height * 0.08,
         child: isDownloading
-            ? CircularProgressIndicator()
+            ? Center(child: CircularProgressIndicator())
             : FlatButton(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -67,6 +67,7 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                     setState(() {
                       isDownloading = true;
                     });
+
                     int location = WallpaperManager
                         .HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
 
@@ -75,10 +76,13 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
 
                     final result = await WallpaperManager.setWallpaperFromFile(
                         file.path, location);
+                    final rsl = await GallerySaver.saveImage(file.path,
+                        albumName: "samoz");
+
                     setState(() {
                       isDownloading = false;
                     });
-                    print(result);
+                    // print(result);
                   } catch (e) {
                     print(e);
                   }

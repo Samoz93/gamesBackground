@@ -24,6 +24,30 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
     return MyScaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        actions: <Widget>[
+          InkWell(
+            onTap: () {
+              setState(
+                () {
+                  isSlide = !isSlide;
+                },
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                isSlide ? Icons.grid_on : Icons.slideshow,
+                size: 30,
+              ),
+            ),
+          ),
+        ],
+        title: Text("Images"),
+        centerTitle: true,
+      ),
       child: BaseWidget<ImagePagination>(
         provider: ImagePagination(type: widget.type),
         builder: (context, pr, ch) => StreamBuilder<List<MyImage>>(
@@ -48,8 +72,20 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
                   isSlide
                       ? CarouselSlider.builder(
                           itemCount: data.length,
-                          itemBuilder: (context, index) =>
-                              _getImage(context, data[index].url),
+                          itemBuilder: (context, index) => InkWell(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => ImageScreen(
+                                    url: data[index].url,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: ImageScreen(
+                              url: data[index].url,
+                            ),
+                          ),
                           options: CarouselOptions(
                             aspectRatio: 0.62,
                             enlargeCenterPage: true,
@@ -68,34 +104,34 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
                             return _getImage(context, data[index].url);
                           },
                         ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: SizedBox(
-                      width: media.width * 0.7,
-                      height: media.width * 0.15,
-                      child: Card(
-                        color: mainColorYellow,
-                        child: FlatButton(
-                          onPressed: () {
-                            setState(
-                              () {
-                                isSlide = !isSlide;
-                              },
-                            );
-                          },
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(isSlide ? "Grid" : "Slide Show"),
-                              Icon(isSlide ? Icons.grid_on : Icons.slideshow),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
+                  // Align(
+                  //   alignment: Alignment.bottomCenter,
+                  //   child: SizedBox(
+                  //     width: media.width * 0.7,
+                  //     height: media.width * 0.15,
+                  //     child: Card(
+                  //       color: mainColorYellow,
+                  //       child: FlatButton(
+                  //         onPressed: () {
+                  //           setState(
+                  //             () {
+                  //               isSlide = !isSlide;
+                  //             },
+                  //           );
+                  //         },
+                  //         materialTapTargetSize:
+                  //             MaterialTapTargetSize.shrinkWrap,
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.center,
+                  //           children: <Widget>[
+                  //             Text(isSlide ? "Grid" : "Slide Show"),
+                  //             Icon(isSlide ? Icons.grid_on : Icons.slideshow),
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             );

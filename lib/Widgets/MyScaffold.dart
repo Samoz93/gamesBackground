@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class MyScaffold extends StatelessWidget {
   final Widget child;
-  const MyScaffold({Key key, this.child}) : super(key: key);
+  final PreferredSizeWidget appBar;
+  const MyScaffold({Key key, this.child, this.appBar}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +15,14 @@ class MyScaffold extends StatelessWidget {
       tileMode: TileMode.mirror,
       end: Alignment.bottomRight,
     );
-    return SafeArea(
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
+      decoration: BoxDecoration(gradient: gradient),
       child: Scaffold(
-        body: Container(
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(gradient: gradient),
-            child: child),
+        backgroundColor: Colors.transparent,
+        appBar: appBar,
+        body: child,
       ),
     );
   }

@@ -9,6 +9,9 @@ class AuthService extends BaseProvider {
     user = _auth.onAuthStateChanged.map((event) => event.uid);
     _loginAnonymously();
   }
+  Future<bool> get isloggedIn async {
+    return await _auth.currentUser() != null;
+  }
 
   _loginAnonymously() async {
     if (await _auth.currentUser() != null) return;

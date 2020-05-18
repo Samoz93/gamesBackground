@@ -21,33 +21,44 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
 
-    Provider.of<AuthService>(context);
+    final prUser = Provider.of<AuthService>(context);
     final pr = Provider.of<ImageService>(context, listen: false);
     return MyScaffold(
-      child: StreamBuilder<List<dynamic>>(
-        stream: pr.types,
-        builder: (BuildContext context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting)
-            return LoadingWidget();
-          if (snapshot.hasError) return MyErrorPage(err: snapshot.error);
-          final data = snapshot.data;
-          return Container(
-            height: media.height,
-            child: CarouselSlider.builder(
-              options: CarouselOptions(
-                aspectRatio: 0.6,
-                enlargeCenterPage: true,
-                scrollDirection: Axis.vertical,
-              ),
-              itemCount: data.length,
-              key: PageStorageKey("main"),
-              itemBuilder: (BuildContext context, int index) {
-                return TypeCarousel(
-                  type: data[index],
+      child: FutureBuilder(
+        future: prUser.isloggedIn,
+        initialData: false,
+        builder: (context, snap) {
+          if (snap.data)
+            return StreamBuilder<List<dynamic>>(
+              stream: pr.types,
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<dynamic>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting)
+                  return LoadingWidget();
+                if (snapshot.hasError) return MyErrorPage(err: snapshot.error);
+                final data = snapshot.data;
+                return Container(
+                  height: media.height,
+                  child: CarouselSlider.builder(
+                    options: CarouselOptions(
+                      aspectRatio: 0.7,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.vertical,
+                      // viewportFraction: 0.79,
+                    ),
+                    itemCount: data.length,
+                    key: PageStorageKey("main"),
+                    itemBuilder: (BuildContext context, int index) {
+                      return TypeCarousel(
+                        type: data[index],
+                      );
+                    },
+                  ),
                 );
               },
-            ),
-          );
+            );
+
+          return LoadingWidget();
         },
       ),
     );

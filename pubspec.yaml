@@ -45,6 +45,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.7.5"
+
+flutter_icons:
+  ios: true
+  image_path: "assets/icon/icon.png"
+  android: true # can specify file name here e.g. "ic_launcher"
+  adaptive_icon_background: "assets/icon/icon.png" # only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/icon/icon.png" # only available for Android 8.0 devices and above
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

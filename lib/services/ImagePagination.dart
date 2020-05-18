@@ -32,12 +32,12 @@ class ImagePagination extends BaseProvider {
       isLoading = false;
       return g;
     });
-    _data2Limit.add(20);
+    _data2Limit.add(500);
   }
 
   extendLimit() {
     isLoading = true;
-    _data2Limit.add(_data2Limit.value + 20);
+    _data2Limit.add(_data2Limit.value + 500);
   }
 
   List<MyImage> _getClasses(val) {

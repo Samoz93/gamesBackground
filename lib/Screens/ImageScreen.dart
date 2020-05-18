@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:backgrounds/Tools/Consts.dart';
 import 'package:backgrounds/Widgets/CustomNetImage.dart';
 import 'package:backgrounds/Widgets/MyScaffold.dart';
@@ -12,22 +14,39 @@ class ImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MyScaffold(
-      child: Stack(
-        children: <Widget>[
-          Hero(
-            tag: url,
-            child: CustomNetImage(
-              url: url,
-              fit: BoxFit.cover,
+    return SafeArea(
+      child: MyScaffold(
+        child: Stack(
+          children: <Widget>[
+            Hero(
+              tag: url,
+              child: CustomNetImage(
+                url: url,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Align(
+            Align(
               alignment: Alignment.bottomCenter,
               child: SetAsWallpaperButton(
                 url: url,
-              ))
-        ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: InkWell(
+                onTap: () {
+                  print("sss");
+                  Navigator.of(context).pop();
+                },
+                child: Icon(
+                  Icons.close,
+                  color: Colors.white,
+                  size: 50,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -46,7 +65,7 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
   @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
-
+    final isIos = Platform.isIOS;
     return Card(
       color: mainColorYellow,
       child: Container(
@@ -58,7 +77,7 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Text("Set as Wallpaper"),
+                    Text(isIos ? "Save to Gallery" : "Set as Wallpaper"),
                     Icon(Icons.wallpaper)
                   ],
                 ),
@@ -74,10 +93,13 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                     var file =
                         await DefaultCacheManager().getSingleFile(widget.url);
 
-                    final result = await WallpaperManager.setWallpaperFromFile(
-                        file.path, location);
-                    final rsl = await GallerySaver.saveImage(file.path,
-                        albumName: "samoz");
+                    if (!isIos)
+                      await WallpaperManager.setWallpaperFromFile(
+                          file.path, location);
+
+                    await GallerySaver.saveImage(
+                      file.path,
+                    );
 
                     setState(() {
                       isDownloading = false;

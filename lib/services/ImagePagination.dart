@@ -44,7 +44,9 @@ class ImagePagination extends BaseProvider {
     final data = getMap(val);
     final cls = data.values.map((e) {
       return MyImage.fromJson(getMap(e));
-    }).toList();
+    }).toList()
+      ..sort((a, b) => b.createdAt - a.createdAt);
+    ;
 
     return cls;
   }

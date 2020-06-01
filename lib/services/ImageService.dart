@@ -15,7 +15,7 @@ class ImageService extends BaseProvider {
         .child(IMAGES2)
         .child(type)
         .orderByChild("createdAt")
-        .limitToFirst(limit)
+        .limitToLast(limit)
         .onValue
         .map((event) {
       if (event.snapshot.value == null) return [];
@@ -30,7 +30,7 @@ class ImageService extends BaseProvider {
         .child(IMAGES2)
         .child(type)
         .orderByChild("createdAt")
-        .limitToFirst(index == 0 ? 2 : index)
+        .limitToLast(index == 0 ? 2 : index)
         .once();
 
     final g = _getClasses(data.value);
@@ -39,7 +39,9 @@ class ImageService extends BaseProvider {
 
   List<MyImage> _getClasses(val) {
     final data = getMap(val);
-    final cls = data.values.map((e) => MyImage.fromJson(getMap(e))).toList();
+    final cls = data.values.map((e) => MyImage.fromJson(getMap(e))).toList()
+      ..sort((a, b) => b.createdAt - a.createdAt);
+
     return cls;
   }
 

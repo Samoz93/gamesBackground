@@ -47,7 +47,7 @@ android {
 
     signingConfigs {
         release {
-            storeFile file('D:\\newKeys\\pubgrooms.jks')
+            storeFile file('c:\\RateMyFriends.jks')
             storePassword 'ihateyou123411'
             keyAlias = 'key0'
             keyPassword 'ihateyou123411'

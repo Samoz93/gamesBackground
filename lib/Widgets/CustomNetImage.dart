@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class CustomNetImage extends StatelessWidget {
+class CustomNetImage extends StatefulWidget {
   final String url;
   final BoxFit fit;
   final double width;
@@ -17,35 +17,47 @@ class CustomNetImage extends StatelessWidget {
       : super(key: key);
 
   @override
+  _CustomNetImageState createState() => _CustomNetImageState();
+}
+
+class _CustomNetImageState extends State<CustomNetImage> {
+  @override
   Widget build(BuildContext context) {
     final media = MediaQuery.of(context).size;
     return Material(
       child: InkWell(
-        onTap: onTap,
+        onTap: widget.onTap,
         child: Center(
           child: CachedNetworkImage(
-            imageUrl: url,
-            fit: fit,
-            width: width ?? media.width,
-            height: height ?? media.height,
+            imageUrl: widget.url,
+            fit: widget.fit,
+            width: widget.width ?? media.width,
+            height: widget.height ?? media.height,
             placeholder: (context, s) => Center(
                 child: CircularProgressIndicator(
               backgroundColor: Theme.of(context).primaryColor,
-              valueColor: AlwaysStoppedAnimation(Theme.of(context).accentColor),
             )), //LoadingWidget(),
             errorWidget: (_, ss, s) => Stack(
               children: <Widget>[
-                Image(
-                  image: AssetImage("assets/err.png"),
+                Container(
+                  height: media.height,
+                  width: media.width,
+                  child: Image(
+                    image: NetworkImage(
+                      "https://toppng.com/uploads/preview/emoji-glitch-popart-kpop-text-textbox-error-face-11563322597vypecnobqs.png",
+                    ),
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Center(
                   child: Container(
                     height: 50,
                     width: double.infinity,
-                    color: Colors.black26,
+                    color: Colors.black54,
                     child: Center(
                       child: Text(
-                        "No Pic Found",
+                        "Error loading Picture",
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),

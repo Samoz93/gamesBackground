@@ -8,6 +8,7 @@ import 'package:backgrounds/Widgets/MyScaffold.dart';
 import 'package:backgrounds/services/ImagePagination.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class ImageGridScreen extends StatefulWidget {
   final String type;
@@ -100,7 +101,16 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
                                   mainAxisSpacing: 1),
                           itemCount: data.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return _getImage(context, data[index].url);
+                            return AnimationConfiguration.staggeredGrid(
+                              // delay: Duration(milliseconds: 10),
+                              position: index,
+                              columnCount: (data.length ~/ 2).toInt(),
+                              child: ScaleAnimation(
+                                scale: 1.4,
+                                child:
+                                    _getImage(context, data[index].url, index),
+                              ),
+                            );
                           },
                         ),
                   // Align(
@@ -140,7 +150,7 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
     );
   }
 
-  Widget _getImage(context, url) {
+  Widget _getImage(context, url, index) {
     return CustomNetImage(
       url: url,
       fit: BoxFit.cover,

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       providers: providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
+        title: 'Games Wallpaper',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           textTheme: GoogleFonts.graduateTextTheme(),

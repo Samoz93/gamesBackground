@@ -7,6 +7,7 @@ import 'package:backgrounds/Widgets/MyErrorPage.dart';
 import 'package:backgrounds/services/ImageService.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
 import 'LoadingWidget.dart';
@@ -69,21 +70,27 @@ class TypeCarousel extends StatelessWidget {
                 if (lst.contains(heroTag))
                   heroTag = DateTime.now().microsecondsSinceEpoch.toString();
                 lst.add(heroTag);
-                return Hero(
-                  key: key,
-                  tag: heroTag,
-                  child: CustomNetImage(
-                    url: url,
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (_) => ImageScreen(
-                            url: url,
-                          ),
-                        ),
-                      );
-                    },
-                    fit: BoxFit.cover,
+                return AnimationConfiguration.staggeredList(
+                  position: index,
+                  child: ScaleAnimation(
+                    scale: 0.4,
+                    child: Hero(
+                      key: key,
+                      tag: heroTag,
+                      child: CustomNetImage(
+                        url: url,
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ImageScreen(
+                                url: url,
+                              ),
+                            ),
+                          );
+                        },
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 );
               },

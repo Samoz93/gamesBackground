@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:backgrounds/Tools/Consts.dart';
 import 'package:backgrounds/Widgets/CustomNetImage.dart';
 import 'package:backgrounds/Widgets/MyScaffold.dart';
+import 'package:device_info/device_info.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -85,6 +86,10 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                   ],
                 ),
                 onPressed: () async {
+                  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+                  AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+                  final bool isSafeToSaveToGallery =
+                      androidInfo.version.sdkInt < 29;
                   try {
                     setState(() {
                       isDownloading = true;
@@ -99,20 +104,22 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                     if (!isIos)
                       await WallpaperManager.setWallpaperFromFile(
                           file.path, location);
-                    await GallerySaver.saveImage(file.path,
-                        albumName: albumname);
+                    if (isSafeToSaveToGallery) {
+                      await GallerySaver.saveImage(file.path,
+                          albumName: albumname);
+                    }
 
                     setState(() {
                       isDownloading = false;
                     });
-                    showFlush(context, true);
+                    showFlush(context, true, isSafeToSaveToGallery);
                     // print(result);
                   } catch (e) {
                     print(e);
                     setState(() {
                       isDownloading = false;
                     });
-                    showFlush(context, false);
+                    showFlush(context, false, isSafeToSaveToGallery);
                   }
                 },
               ),
@@ -120,7 +127,7 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
     );
   }
 
-  showFlush(BuildContext context, isOk) {
+  showFlush(BuildContext context, isOk, isSafeToSaveToGallery) {
     final color = isOk ? Colors.green : Colors.red;
     Flushbar(
       duration: Duration(seconds: 2),
@@ -140,7 +147,9 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
       ),
       messageText: Text(
         isOk
-            ? "Image have been saved to the album \" $albumname"
+            ? isSafeToSaveToGallery
+                ? "Image have been saved to the album \" $albumname"
+                : "Done Setting your wallpaper"
             : "Some error happened try again later",
       ),
       backgroundColor: mainColorYellow,

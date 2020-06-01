@@ -1,6 +1,5 @@
 import 'package:backgrounds/Screens/ImageScreen.dart';
 import 'package:backgrounds/Tools/BaseWidget.dart';
-import 'package:backgrounds/Tools/Consts.dart';
 import 'package:backgrounds/Tools/MyImage.dart';
 import 'package:backgrounds/Widgets/CustomNetImage.dart';
 import 'package:backgrounds/Widgets/LoadingWidget.dart';
@@ -22,7 +21,7 @@ class _ImageGridScreenState extends State<ImageGridScreen> {
   var isSlide = false;
   @override
   Widget build(BuildContext context) {
-    final media = MediaQuery.of(context).size;
+    // final media = MediaQuery.of(context).size;
     return MyScaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,

@@ -38,6 +38,57 @@
             {
               "client_id": "171837397899-kr0ompperpk7uvm18dnjuksrfr4t2ptn.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "171837397899-lao2rlde82hj4tp633ekm1lp1g1dlnt3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samozstudio.backgrounds"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171837397899:android:b78258f14dc9d5ae596d8e",
+        "android_client_info": {
+          "package_name": "com.samozstudio.bk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171837397899-6r5ji23hflke273l9qov2jbckqnue47j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samozstudio.bk",
+            "certificate_hash": "4298ba91ac479877506de3dde4de2d933738831a"
+          }
+        },
+        {
+          "client_id": "171837397899-kr0ompperpk7uvm18dnjuksrfr4t2ptn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMu1wSdZwd3X_y3MIWB9wCRAczQIGtGEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171837397899-kr0ompperpk7uvm18dnjuksrfr4t2ptn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "171837397899-lao2rlde82hj4tp633ekm1lp1g1dlnt3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.samozstudio.backgrounds"
+              }
             }
           ]
         }

@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.samozstudio.backgrounds">
+    package="com.samozstudio.bk">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="backgrounds"
+        android:label="Games Wallpaper"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

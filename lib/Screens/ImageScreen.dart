@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:backgrounds/Tools/Consts.dart';
 import 'package:backgrounds/Widgets/CustomNetImage.dart';
 import 'package:backgrounds/Widgets/MyScaffold.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gallery_saver/gallery_saver.dart';
@@ -60,6 +61,8 @@ class SetAsWallpaperButton extends StatefulWidget {
   _SetAsWallpaperButtonState createState() => _SetAsWallpaperButtonState();
 }
 
+const albumname = "Game Gallery";
+
 class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
   bool isDownloading = false;
   @override
@@ -96,21 +99,51 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                     if (!isIos)
                       await WallpaperManager.setWallpaperFromFile(
                           file.path, location);
-
-                    await GallerySaver.saveImage(
-                      file.path,
-                    );
+                    await GallerySaver.saveImage(file.path,
+                        albumName: albumname);
 
                     setState(() {
                       isDownloading = false;
                     });
+                    showFlush(context, true);
                     // print(result);
                   } catch (e) {
                     print(e);
+                    setState(() {
+                      isDownloading = false;
+                    });
+                    showFlush(context, false);
                   }
                 },
               ),
       ),
     );
+  }
+
+  showFlush(BuildContext context, isOk) {
+    final color = isOk ? Colors.green : Colors.red;
+    Flushbar(
+      duration: Duration(seconds: 2),
+      barBlur: 5,
+      leftBarIndicatorColor: color,
+      routeColor: color,
+      flushbarPosition: FlushbarPosition.TOP,
+      flushbarStyle: FlushbarStyle.FLOATING,
+      shouldIconPulse: true,
+      titleText: Text(
+        isOk ? "Sucess " : "Error ",
+        style: TextStyle(fontSize: 20, color: color),
+      ),
+      icon: Icon(
+        Icons.done,
+        color: color,
+      ),
+      messageText: Text(
+        isOk
+            ? "Image have been saved to the album \" $albumname"
+            : "Some error happened try again later",
+      ),
+      backgroundColor: mainColorYellow,
+    ).show(context);
   }
 }

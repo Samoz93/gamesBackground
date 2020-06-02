@@ -109,7 +109,7 @@ class TypeCarousel extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: Container(
-                width: media.width * 0.45,
+                width: media.width * 0.5,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: _getSeeMore(context),
@@ -127,11 +127,13 @@ class TypeCarousel extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(
-            "See More",
-            style: TextStyle(
-              color: mainColorYellow,
-              fontSize: 20,
+          FittedBox(
+            child: Text(
+              "See More",
+              style: TextStyle(
+                color: mainColorYellow,
+                fontSize: 20,
+              ),
             ),
           ),
           Icon(

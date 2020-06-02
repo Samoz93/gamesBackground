@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
                   height: media.height,
                   child: CarouselSlider.builder(
                     options: CarouselOptions(
-                      aspectRatio: 0.7,
+                      aspectRatio: 0.8,
                       enlargeCenterPage: true,
                       scrollDirection: Axis.vertical,
                       // viewportFraction: 0.79,

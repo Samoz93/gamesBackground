@@ -86,27 +86,30 @@ class _SetAsWallpaperButtonState extends State<SetAsWallpaperButton> {
                   ],
                 ),
                 onPressed: () async {
-                  DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
-                  AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-                  final bool isSafeToSaveToGallery =
-                      androidInfo.version.sdkInt < 29;
+                  bool isSafeToSaveToGallery;
                   try {
                     setState(() {
                       isDownloading = true;
                     });
-
-                    int location = WallpaperManager
-                        .HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
-
                     var file =
                         await DefaultCacheManager().getSingleFile(widget.url);
 
-                    if (!isIos)
+                    if (Platform.isIOS) {
+                      isSafeToSaveToGallery = true;
+                    } else {
+                      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+                      AndroidDeviceInfo androidInfo =
+                          await deviceInfo.androidInfo;
+
+                      isSafeToSaveToGallery = androidInfo.version.sdkInt < 29;
+                      int location = WallpaperManager
+                          .HOME_SCREEN; // or location = WallpaperManager.LOCK_SCREEN;
                       await WallpaperManager.setWallpaperFromFile(
                           file.path, location);
+                    }
+
                     if (isSafeToSaveToGallery) {
-                      await GallerySaver.saveImage(file.path,
-                          albumName: albumname);
+                      GallerySaver.saveImage(file.path, albumName: albumname);
                     }
 
                     setState(() {

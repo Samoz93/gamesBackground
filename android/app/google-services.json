@@ -59,6 +59,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "171837397899-7o45j4rfqkgbom02nbtbdscbme56j7qk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samozstudio.bk",
+            "certificate_hash": "4a7b097ce7abec28050a51d53896dec66eef86db"
+          }
+        },
+        {
+          "client_id": "171837397899-h6cpfd85jett9fqrci597eb1erh0appg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.samozstudio.bk",
+            "certificate_hash": "9aeb3579c9a297b5928564d3f98365b24c2551e0"
+          }
+        },
+        {
           "client_id": "171837397899-6r5ji23hflke273l9qov2jbckqnue47j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

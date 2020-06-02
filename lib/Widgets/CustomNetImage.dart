@@ -1,3 +1,4 @@
+import 'package:backgrounds/Tools/Consts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -33,10 +34,15 @@ class _CustomNetImageState extends State<CustomNetImage> {
             fit: widget.fit,
             width: widget.width ?? media.width,
             height: widget.height ?? media.height,
-            placeholder: (context, s) => Center(
-                child: CircularProgressIndicator(
-              backgroundColor: Theme.of(context).primaryColor,
-            )), //LoadingWidget(),
+            placeholder: (context, s) => Container(
+                decoration: BoxDecoration(
+                    gradient:
+                        LinearGradient(colors: [mainColorYellow, Colors.blue])),
+                child: Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.black,
+                  ),
+                )), //LoadingWidget(),
             errorWidget: (_, ss, s) => Stack(
               children: <Widget>[
                 Container(

@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:backgrounds/Tools/Consts.dart';
 import 'package:backgrounds/Widgets/CustomNetImage.dart';
 import 'package:backgrounds/Widgets/MyScaffold.dart';
-import 'package:device_info/device_info.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:wallpaper_manager/wallpaper_manager.dart';
+import 'package:device_info/device_info.dart';
 
 class ImageScreen extends StatelessWidget {
   final String url;

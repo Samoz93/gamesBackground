@@ -1,6 +1,7 @@
 import 'package:backgrounds/Tools/Consts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'LoadingWidget.dart';
 
 class CustomNetImage extends StatefulWidget {
   final String url;
@@ -39,9 +40,7 @@ class _CustomNetImageState extends State<CustomNetImage> {
                     gradient:
                         LinearGradient(colors: [mainColorYellow, Colors.blue])),
                 child: Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.black,
-                  ),
+                  child: LoadingWidget(),
                 )), //LoadingWidget(),
             errorWidget: (_, ss, s) => Stack(
               children: <Widget>[

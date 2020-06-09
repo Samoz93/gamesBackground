@@ -41,8 +41,8 @@ android {
         applicationId "com.samozstudio.bk"
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 21
-        versionName "V2.1"
+        versionCode 22
+        versionName "V2.2"
         multiDexEnabled true
 
     }
@@ -68,7 +68,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.firebase:firebase-analytics:17.4.2'
+    implementation 'com.google.firebase:firebase-analytics:17.4.3'
 
 }
 apply plugin: 'com.google.gms.google-services'

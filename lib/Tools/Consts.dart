@@ -5,3 +5,4 @@ Map<String, dynamic> getMap(data) {
 }
 
 final mainColorYellow = Color(0xfff6d365);
+final gridAdThreshould = 10;

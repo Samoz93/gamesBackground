@@ -1,10 +1,12 @@
 import 'package:backgrounds/Screens/MainScreed.dart';
+import 'package:backgrounds/services/AuthService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'Tools/ProvidersSetup.dart';
+import 'Widgets/Splash.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +43,19 @@ class _MyAppState extends State<MyApp> {
           textTheme: GoogleFonts.graduateTextTheme(),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MainScreen(),
+        home: AnimatedSplash(
+          imagePath: 'images/icon.jpeg',
+          home: MainScreen(),
+          customFunction: () async {
+            //await for login
+            final prUser = locator<AuthService>();
+            await prUser.loginAnonymously();
+            return "s";
+          },
+          duration: 100,
+          outputAndHome: {"s": MainScreen()},
+          type: AnimatedSplashType.BackgroundProcess,
+        ),
       ),
     );
   }

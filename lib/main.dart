@@ -35,7 +35,7 @@ class _MyAppState extends State<MyApp> {
       providers: providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Games Wallpaper',
+        title: 'Games Walpaper',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           textTheme: GoogleFonts.graduateTextTheme(),
